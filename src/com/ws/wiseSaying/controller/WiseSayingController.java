@@ -45,6 +45,7 @@ public class WiseSayingController {
 	}
 
 	public void remove() {
-	
+		
+
 	}
 }
