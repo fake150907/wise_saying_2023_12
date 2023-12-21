@@ -77,3 +77,9 @@ public void remove(String cmd) {
 		System.out.println("paramBits : " + params);
 
 	}
+-----------------------------------------------------------------
+// 목록화 심화버전
+System.out.println("actionCode : " + rq.getActionCode());
+System.out.println("params.id : " + rq.getParam("id"));
+System.out.println("params.author : " + rq.getParam("author"));
+System.out.println("params.content : " + rq.getParam("content"));

@@ -4,6 +4,7 @@ import com.ws.system.controller.SystemController;
 import com.ws.wiseSaying.controller.WiseSayingController;
 
 public class App {
+	private byte sysytem_status = 1;
 
 	public void run() {
 		System.out.println("== 명언 앱 실행 ==");
@@ -11,29 +12,28 @@ public class App {
 		SystemController systemController = new SystemController();
 		WiseSayingController wiseSayingController = new WiseSayingController();
 
-		while (true) {
+		while (sysytem_status == 1) {
 			System.out.print("명령어) ");
 			String cmd = Container.getScanner().nextLine().trim();
-			if (cmd.equals("종료")) {
+			Rq rq = new Rq(cmd);
+			
+			switch(rq.getActionCode()) {
+			case "종료":
 				systemController.exit();
+				sysytem_status = 0;
 				break;
-			} else if (cmd.equals("등록")) {
+			case "등록":
 				wiseSayingController.write();
-			} else if (cmd.equals("목록")) {
+				break;
+			case "목록":
 				wiseSayingController.list();
-			} else if (cmd.startsWith("삭제")) {
-				
-				Rq rq = new Rq(cmd);
-				
-				System.out.println("actionCode : " + rq.getActionCode());
-				System.out.println("params.id : " + rq.getParam("id"));
-				System.out.println("params.author : " + rq.getParam("author"));
-				System.out.println("params.content : " + rq.getParam("content"));
-				
-				wiseSayingController.remove();
-			} else {
+				break;
+			case "삭제":
+				wiseSayingController.remove(rq);					
+				break;
+			default:
 				System.out.println("존재하지 않는 명령어입니다.");
-			}
+			}	
 		}
 	}
 }
