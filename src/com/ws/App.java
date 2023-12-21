@@ -1,6 +1,10 @@
+package com.ws;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.ws.wiseSaying.entity.WiseSaying;
 
 public class App {
 
@@ -44,6 +48,7 @@ public class App {
 					for (int i = wiseSayings.size() - 1; i >= 0; i--) {
 						WiseSaying ws = wiseSayings.get(i);// 코드가 길어지면 길어질수록 변수에 담아서 가독성이 더 좋게끔 짧게 코딩해줘야한다.
 						System.out.printf("%d | %s | %s\n", ws.getId(), ws.getAuthor(), ws.getContent());
+						
 					}
 				}
 			} else {
