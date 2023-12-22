@@ -1,59 +1,35 @@
 package com.ws.wiseSaying.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ws.wiseSaying.entity.WiseSaying;
+import com.ws.wiseSaying.repository.WiseSayingRepository;
 
 public class WiseSayingService {
-	
-	private int lastWiseSayingId;
-	private List<WiseSaying> wiseSayings;
-	
+
+	private WiseSayingRepository wiseSayingRepository;
+
 	public WiseSayingService() {
-		lastWiseSayingId = 0;
-		wiseSayings = new ArrayList<>();
+		wiseSayingRepository = new WiseSayingRepository();
 	}
-	
-	public WiseSaying findById(int id) {
-		for (WiseSaying wiseSaying : wiseSayings) {
-			if (wiseSaying.getId() == id) {
-				return wiseSaying;
-			}
-		}
-		return null;
-	}
-	
+
 	public int write(String content, String author) {
-		int id = lastWiseSayingId + 1;
-
-		WiseSaying wiseSaying = new WiseSaying(id, content, author);
-		wiseSayings.add(wiseSaying);
-
-		lastWiseSayingId = id;
-		
-		return id;
+		return wiseSayingRepository.write(content, author);
 	}
-	
-	public List<WiseSaying> list() {
-		
-		return wiseSayings;
 
-	}
-	
 	public void remove(WiseSaying wiseSaying) {
-		wiseSayings.remove(wiseSaying);
+		wiseSayingRepository.remove(wiseSaying);
 	}
 
-	public void modify(WiseSaying wiseSaying,String content, String author) {
-	
-		wiseSaying.setContent(content);
-		wiseSaying.setAuthor(author);
-
+	public void modify(WiseSaying wiseSaying, String content, String author) {
+		wiseSayingRepository.modify(wiseSaying, content, author);
 	}
 
 	public List<WiseSaying> findAll() {
-		// TODO Auto-generated method stub
-		return wiseSayings;
+		return wiseSayingRepository.findAll();
+	}
+
+	public WiseSaying findById(int id) {
+		return wiseSayingRepository.findById(id);
 	}
 }

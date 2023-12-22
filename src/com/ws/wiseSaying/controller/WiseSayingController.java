@@ -36,7 +36,10 @@ public class WiseSayingController {
 			System.out.printf("%d  /  %s  /  %s\n", ws.getId(), ws.getAuthor(), ws.getContent());
 
 		}
-		System.out.println("등록 된 명언이 없습니다.");
+
+		if (wiseSayings.size() == 0) {
+			System.out.println("등록 된 명언이 없습니다.");
+		}
 	}
 
 	public void remove(Rq rq) {
@@ -65,14 +68,14 @@ public class WiseSayingController {
 			System.out.println("id(정수)를 제대로 입력해주세요");
 			return;
 		}
-		
+
 		WiseSaying wiseSaying = wiseSayingService.findById(id);
 
 		if (wiseSaying == null) {
 			System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
 			return;
 		}
-		
+
 		System.out.println("(기존)명언 : " + wiseSaying.getContent());
 		System.out.println("(기존)작가 : " + wiseSaying.getAuthor());
 
@@ -80,7 +83,7 @@ public class WiseSayingController {
 		String content = Container.getScanner().nextLine().trim();
 		System.out.print("작가 : ");
 		String author = Container.getScanner().nextLine().trim();
-		
+
 		wiseSayingService.modify(wiseSaying, content, author);
 
 		System.out.printf("%d번 명언이 수정되었습니다.\n", id);
