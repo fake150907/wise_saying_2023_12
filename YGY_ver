@@ -83,3 +83,31 @@ System.out.println("actionCode : " + rq.getActionCode());
 System.out.println("params.id : " + rq.getParam("id"));
 System.out.println("params.author : " + rq.getParam("author"));
 System.out.println("params.content : " + rq.getParam("content"));
+// 이 WiseSayingController에 들어가는 update 메서드는 내가 적은거야!
+public void modify(Rq rq) {
+
+		int id = rq.getIntParam("id", -1);
+		
+		if (id == -1) {
+			System.out.println("id(정수)를 제대로 입력해주세요");
+			return;
+		}
+		// 입력된 id와 일치하는 명언 객체 찾기
+		WiseSaying ws = findById(id);
+		
+		if (ws == null) {
+			System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+			return;
+		}
+		
+		System.out.println("명언 : " + ws.getContent());
+		System.out.print("(새)명언 : ");
+		String content = Container.getScanner().nextLine().trim();
+		ws.setContent(content);
+		System.out.println("작가 : " + ws.getAuthor());
+		System.out.print("(새)작가 : ");
+		String author = Container.getScanner().nextLine().trim();
+		ws.setAuthor(author);
+		
+		System.out.printf("%d번 명언이 수정되었습니다.\n", id);
+	}

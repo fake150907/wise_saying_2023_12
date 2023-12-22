@@ -3,7 +3,7 @@ package com.ws;
 import java.util.HashMap;
 import java.util.Map;
 
-// Rq == Request(요청)
+// Rq == Request(요청)		
 public class Rq {
 	private String actionCode;
 	private Map<String, String> params;
