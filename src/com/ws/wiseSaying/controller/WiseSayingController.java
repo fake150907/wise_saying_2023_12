@@ -13,6 +13,7 @@ public class WiseSayingController {// App한테 받은 명령을 수행하려고
 
 	public WiseSayingController() { // 변수에 객체연결이나 값을 넣어주려고 생성자 메서드를 이용한다.
 		wiseSayingService = new WiseSayingService();// 명령어에 따른 요청을 처리하기 위해 wiseSayingService변수에 WiseSayingService객체를 연결.
+		wiseSayingService = Container.wiseSayingService;
 	}
 
 	public void write() { // wiseSayingController가 write()메서드를 실행하려고 만든 메서드
@@ -75,17 +76,17 @@ public class WiseSayingController {// App한테 받은 명령을 수행하려고
 			return;// return;해주면서 void 메서드가 끝나게해준다.
 		}
 
-		System.out.println("(기존)명언 : " + wiseSaying.getContent());
-		System.out.println("(기존)작가 : " + wiseSaying.getAuthor());
+		System.out.println("(기존)명언 : " + wiseSaying.getContent());// 기존에 등록되어 있던 명언을 출력해서 보여준다.
+		System.out.println("(기존)작가 : " + wiseSaying.getAuthor());// 기존에 등록되어 있던 작가를 출력해서 보여준다.
 
-		System.out.print("명언 : ");
-		String content = Container.getScanner().nextLine().trim();
-		System.out.print("작가 : ");
-		String author = Container.getScanner().nextLine().trim();
+		System.out.print("명언 : ");// 기존에 등록되어 있던 명언대신 수정할 명언을 입력받기 위한 출력.
+		String content = Container.getScanner().nextLine().trim();// 명언을 입력받고 저장하기위해 Container를 이용해 Scanner를 사용하고 nextLine으로 입력받고 trim으로 좌우공백 제거후 content변수에 저장한다.
+		System.out.print("작가 : ");// 기존에 등록되어 있던 작가대신 수정할 작가를 입력받기 위한 출력.
+		String author = Container.getScanner().nextLine().trim();// 작가를 입력받고 저장하기위해 Container를 이용해 Scanner를 사용하고 nextLine으로 입력받고 trim으로 좌우공백 제거후 content변수에 저장한다.
 
-		wiseSayingService.modify(wiseSaying, content, author);
+		wiseSayingService.modify(wiseSaying, content, author);// wiseSayingService를 통해 인자값을  수정된 wiseSaying과 content, author를 넘겨주고 modify함수를 실행한다.
 
-		System.out.printf("%d번 명언이 수정되었습니다.\n", id);
+		System.out.printf("%d번 명언이 수정되었습니다.\n", id);// 몇번 명언이 수정되었는지 알려주는 출력을한다.
 	}
 
 }
